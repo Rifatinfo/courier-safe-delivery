@@ -5,6 +5,9 @@ import { StatusCodes } from "http-status-codes";
 
 import ApiError from "../../errors/ApiError";
 import { AuthService } from "./auth.service";
+import { envVars } from "../../config/env";
+import { createUserTokens } from "../../../utiles/createUserTokens";
+import { setAuthCookie } from "../../../utiles/setAuthCookie";
 
 
 
@@ -43,6 +46,36 @@ const login = catchAsync(async (req: Request, res: Response) => {
         },
     });
 });
+
+
+const googleCallbackController = catchAsync(
+  async (req: Request, res: Response) => {
+    const user = req.user;
+
+    if (!user) {
+      return res.redirect(
+        `${envVars.FRONTEND_URL}/login`
+      );
+    }
+
+    const tokenInfo = createUserTokens(user);
+
+    setAuthCookie(res, tokenInfo);
+
+    let redirectUrl =
+      (req.query.state as string) || "/";
+
+    if (redirectUrl.startsWith("/")) {
+      redirectUrl = redirectUrl.slice(1);
+    }
+
+    res.redirect(
+      `${envVars.FRONTEND_URL}/${redirectUrl}?loggedIn=true`
+    );
+  }
+);
+
+
 
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
     const token = req.cookies?.refreshToken;
@@ -86,5 +119,5 @@ export const AuthController = {
     login,
     refreshToken,
     getMe,
-    
+    googleCallbackController
 }

@@ -1,6 +1,8 @@
 
 import express, { NextFunction, Request, Response } from 'express'
 import { AuthController } from './auth.controller';
+import passport from '../../config/passport';
+import { envVars } from '../../config/env';
 
 
 
@@ -23,6 +25,28 @@ router.post(
     AuthController.refreshToken
 )
 
+router.get(
+  "/google",
+  (req, res, next) => {
+    const state = (req.query.redirect as string) || "/";
+
+    passport.authenticate("google", {
+      scope: ["profile", "email"],
+      state,
+      session: false,
+    })(req, res, next);
+  }
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    failureRedirect:
+      `${envVars.FRONTEND_URL}/login?error=auth_failed`,
+    session: false,
+  }),
+  AuthController.googleCallbackController
+);
 
 
 

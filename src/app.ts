@@ -9,11 +9,14 @@ import path from "path";
 import { envVars } from "./app/config/env";
 const app = express();
 
+import passport from "passport";
+import "./app/config/passport"; 
 // Middleware
 app.use(cors()); 
 app.use(compression()); 
 app.use(express.json()); 
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.use(
   "/uploads",
