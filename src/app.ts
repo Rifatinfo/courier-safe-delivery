@@ -3,25 +3,34 @@
 import compression from "compression";
 import cors from "cors";
 import express from "express";
-// import { router } from "./app/routes";
 import cookieParser from 'cookie-parser';
 import { router } from "./app/modules/routes";
-
+import path from "path";
+import { envVars } from "./app/config/env";
 const app = express();
 
+import passport from "passport";
+import "./app/config/passport"; 
 // Middleware
 app.use(cors()); 
 app.use(compression()); 
 app.use(express.json()); 
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.use(
+  "/uploads",
+  express.static(path.join(process.cwd(), "uploads"))
+);
+app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [envVars.FRONTEND_URL as string],
     credentials: true,
   })
 );
-
+//parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1", router);
 
 // Default route for testing
