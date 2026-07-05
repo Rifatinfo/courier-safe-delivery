@@ -7,7 +7,7 @@ import ApiError from "../../errors/ApiError";
 import { AuthService } from "./auth.service";
 import { envVars } from "../../config/env";
 import { createUserTokens } from "../../../utiles/createUserTokens";
-import { setAuthCookie } from "../../../utiles/setAuthCookie";
+import { setAccessTokenCookie, setAuthCookie } from "../../../utiles/setAuthCookie";
 
 
 
@@ -23,18 +23,11 @@ const login = catchAsync(async (req: Request, res: Response) => {
         needPasswordChange,
     } = result;
 
-    res.cookie("accessToken", accessToken, {
-        secure: true,
-        httpOnly: true,
-        sameSite: "none",
-        maxAge: accessTokenMaxAge,
-    });
-
-    res.cookie("refreshToken", refreshToken, {
-        secure: true,
-        httpOnly: true,
-        sameSite: "none",
-        maxAge: refreshTokenMaxAge,
+    setAuthCookie(res, {
+        accessToken,
+        refreshToken,
+        accessTokenMaxAge,
+        refreshTokenMaxAge,
     });
 
     sendResponse(res, {
@@ -85,12 +78,7 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
     }
 
     const result = await AuthService.refreshToken(token);
-    res.cookie("accessToken", result.accessToken, {
-        secure: true,
-        httpOnly: true,
-        sameSite: "none",
-        maxAge: result.accessTokenMaxAge,
-    });
+    setAccessTokenCookie(res, result.accessToken, result.accessTokenMaxAge);
 
     sendResponse(res, {
         statusCode: StatusCodes.OK,

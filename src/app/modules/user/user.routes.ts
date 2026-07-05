@@ -5,7 +5,7 @@ import { UserValidation } from "./validation";
 
 const router = express.Router();
 router.post(
-  "/register",
+  "/create-customer",
   (req, res, next) => {
     try {
       req.body =

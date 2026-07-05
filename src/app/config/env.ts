@@ -40,6 +40,7 @@ interface EnvConfig {
   ROUTER_API_KEY: string;
   GOOGLE_CLIENT_SECRET : string;
   GOOGLE_CLIENT_ID :  string;
+  COOKIE_DOMAIN?: string;
 }
 
 const loadEnvVariable = (): EnvConfig => {
@@ -128,6 +129,7 @@ const loadEnvVariable = (): EnvConfig => {
     SSL_IPN_URL: process.env.SSL_IPN_URL as string,
     GOOGLE_CLIENT_SECRET  : process.env.GOOGLE_CLIENT_SECRET as  string,
     GOOGLE_CLIENT_ID : process.env.GOOGLE_CLIENT_ID as string,
+    COOKIE_DOMAIN: process.env.COOKIE_DOMAIN,
   };
 };
 

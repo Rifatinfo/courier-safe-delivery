@@ -4,6 +4,11 @@ import auth from "../../middlewares/auth";
 
 const router = Router();
 
+router.get(
+  "/booked-seats",
+  BookingController.getBookedSeatsController,
+);
+
 // Protected Route
 router.post(
   "/create-booking",
