@@ -101,6 +101,23 @@ const createBookingService = async ({
   }
 };
 
+const getBookedSeats = async (busName: string): Promise<string[]> => {
+  if (!busName) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, "Bus name is required");
+  }
+
+  const [rows]: any = await db.query(
+    `SELECT seat_number
+     FROM seats
+     WHERE bus_name = ? AND is_booked = TRUE
+     ORDER BY seat_number ASC`,
+    [busName],
+  );
+
+  return rows.map((row: { seat_number: string }) => row.seat_number);
+};
+
 export const BookingService = {
   createBookingService,
+  getBookedSeats,
 };

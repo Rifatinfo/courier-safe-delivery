@@ -13,9 +13,9 @@ export const createUserTokens = (user: UserPayload) => {
     id: user.id,
     role: user.role,
     email: user.email,
-    type: user.type,
+    type: user.type ?? "user",
   };
-   console.log("PAYLOAD:", payload);
+
   const accessToken = jwtHelper.generateToken(
     payload,
     envVars.JWT_SECRET as string,

@@ -11,8 +11,16 @@ const app = express();
 
 import passport from "passport";
 import "./app/config/passport"; 
+
+const corsOptions = {
+  origin: envVars.FRONTEND_URL,
+  credentials: true,
+};
+
+app.set("trust proxy", 1);
+
 // Middleware
-app.use(cors()); 
+app.use(cors(corsOptions)); 
 app.use(compression()); 
 app.use(express.json()); 
 app.use(cookieParser());
@@ -21,12 +29,6 @@ app.use(passport.initialize());
 app.use(
   "/uploads",
   express.static(path.join(process.cwd(), "uploads"))
-);
-app.use(
-  cors({
-    origin: [envVars.FRONTEND_URL as string],
-    credentials: true,
-  })
 );
 //parser
 app.use(express.json());
