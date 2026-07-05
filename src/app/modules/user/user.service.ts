@@ -37,7 +37,7 @@ const createCustomer = async (payload: any) => {
 };
   const getAllUsers = async () => {
     const [rows]: any = await db.query(
-      "SELECT id, name, email, avatar, role, created_at FROM users",
+      "SELECT * FROM users",
     );
 
     return rows;
