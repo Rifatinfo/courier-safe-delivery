@@ -9,7 +9,7 @@ import { StatusCodes } from "http-status-codes";
 
 const getBookedSeatsController = catchAsync(
   async (req: Request, res: Response) => {
-    const busName = req.query.busName;
+    const busName = req.query.busName || 'Greenline Paribahan';
 
     if (typeof busName !== "string" || !busName.trim()) {
       throw new ApiError(StatusCodes.BAD_REQUEST, "Bus name is required");
@@ -47,7 +47,58 @@ const getBookedSeatsController = catchAsync(
   }
 );
 
+const getMyBookingsController = catchAsync(
+  async (req: Request, res: Response) => {
+    const userId = Number(req.user?.id);
+
+    if (!req.user?.id || Number.isNaN(userId)) {
+      throw new Error("User ID is required");
+    }
+
+    const result = await BookingService.getMyBookingsService(userId);
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Bookings retrieved successfully",
+      data: result,
+    });
+  }
+);
+
+const getAllBookingsController = catchAsync(
+  async (_req: Request, res: Response) => {
+    const result = await BookingService.getAllBookingsService();
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "All bookings retrieved successfully",
+      data: result,
+    });
+  }
+);
+
+
+const getDashboardStatisticsController = catchAsync(
+  async (_req: Request, res: Response) => {
+    const result = await BookingService.getDashboardStatisticsService();
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Dashboard statistics retrieved successfully",
+      data: result,
+    });
+  }
+);
+
 export const BookingController = {
   getBookedSeatsController,
   createBookingController,
+  getMyBookingsController,
+  getAllBookingsController,
+  getDashboardStatisticsController
 };
+
+
