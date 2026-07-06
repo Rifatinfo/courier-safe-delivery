@@ -11,3 +11,7 @@ export const db = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
+
+// database -- realo_eticket
+// pass -- N9#vQ2!Lm8@Xp4$Kr
+
