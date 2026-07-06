@@ -18,7 +18,7 @@ router.post(
 );
 router.get(
   "/my-bookings",
-  auth("CUSTOMER"),
+  auth("CUSTOMER", "ADMIN"),
   BookingController.getMyBookingsController
 );
 

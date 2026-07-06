@@ -34,3 +34,32 @@ VALUES
 ('Greenline Paribahan', 'E2', 500, FALSE),
 ('Greenline Paribahan', 'E3', 500, FALSE),
 ('Greenline Paribahan', 'E4', 500, FALSE);
+
+('Greenline Paribahan', 'F1', 500, FALSE),
+('Greenline Paribahan', 'F2', 500, FALSE),
+('Greenline Paribahan', 'F3', 500, FALSE),
+('Greenline Paribahan', 'F4', 500, FALSE),
+
+('Greenline Paribahan', 'G', 500, FALSE),
+('Greenline Paribahan', 'G1', 500, FALSE),
+('Greenline Paribahan', 'G2', 500, FALSE),
+('Greenline Paribahan', 'G3', 500, FALSE),
+('Greenline Paribahan', 'G4', 500, FALSE),
+
+('Greenline Paribahan', 'H', 500, FALSE),
+('Greenline Paribahan', 'H1', 500, FALSE),
+('Greenline Paribahan', 'H2', 500, FALSE),
+('Greenline Paribahan', 'H3', 500, FALSE),
+('Greenline Paribahan', 'H4', 500, FALSE),
+
+('Greenline Paribahan', 'I', 500, FALSE),
+('Greenline Paribahan', 'I1', 500, FALSE),
+('Greenline Paribahan', 'I2', 500, FALSE),
+('Greenline Paribahan', 'I3', 500, FALSE),
+('Greenline Paribahan', 'I4', 500, FALSE),
+
+('Greenline Paribahan', 'J', 500, FALSE),
+('Greenline Paribahan', 'J1', 500, FALSE),
+('Greenline Paribahan', 'J2', 500, FALSE),
+('Greenline Paribahan', 'J3', 500, FALSE),
+('Greenline Paribahan', 'J4', 500, FALSE);
