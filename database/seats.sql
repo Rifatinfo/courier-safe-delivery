@@ -33,7 +33,7 @@ VALUES
 ('Greenline Paribahan', 'E1', 500, FALSE),
 ('Greenline Paribahan', 'E2', 500, FALSE),
 ('Greenline Paribahan', 'E3', 500, FALSE),
-('Greenline Paribahan', 'E4', 500, FALSE);
+('Greenline Paribahan', 'E4', 500, FALSE),
 
 ('Greenline Paribahan', 'F1', 500, FALSE),
 ('Greenline Paribahan', 'F2', 500, FALSE),
